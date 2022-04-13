@@ -1,29 +1,59 @@
-const express = require("express");
-const path = require("path")
 
-const port = process.env.PORT || 3000;
+import { Telegraf } from 'telegraf';
+const bot = new Telegraf('5278569680:AAESpgWRI__VRDEzUAIiKUtpDatDYpQbzLc');
+bot.command('contract', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, '0xEd5782C218918314aAad7b3FF89BB0BFF3dC0514', {
 
-const app = express();
+  })
+})
 
-app.use(express.static('static'))
-app.use(express.json());
+bot.command('ido', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'IDO is planned to start on 24/4/2022 at DxSale', {
 
-app.get("/api/data", (req, res) => {
-  res.status(200).json({
-    data: [
-      { id: 1, title: "Some data" },
-      { id: 2, title: "Some other data" },
-    ],
-  });
-});
+  })
+})
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
-});
+bot.command('info', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'Symbol: SLUFFY, Decimals: 8, Total supply: 1,000,000,000,000,000', {
 
-app.get("/index", (req, res) => {
-  res.redirect("/")
-});
+  })
+})
+
+bot.command('tokenomics', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, '95% IDO & DEX listing, 5% marketing | 8% fee: 4% distribute to hodlers, 2% team fund, 1% burn, 1% add back to liquidity pool', {
+
+  })
+})
+
+bot.command('web', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'https://shibaluffyinu.org', {
+
+  })
+})
+
+bot.command('twitter', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'https://twitter.com/shibaluffyinu', {
+
+  })
+})
+bot.command('medium', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'https://medium.com/@shibaluffyinu', {
+
+  })
+})
+bot.command('help', ctx => {
+  console.log(ctx.from)
+  bot.telegram.sendMessage(ctx.chat.id, 'contract | tokenomics | info | ido | web | twitter | medium', {
+
+  })
+})
 
 
-app.listen(port, () => console.log(`Listening on ${port}`));
+bot.launch();
