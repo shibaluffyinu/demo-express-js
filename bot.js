@@ -63,6 +63,10 @@ bot.onText(/\/listing/, (msg) => {
     bot.sendMessage(msg.chat.id, "🔥 Coinsniper, Watcherguru, Coinhunter, thebittimes 🔥")
 })
 
+bot.onText(/\/whitelist/, (msg) => {
+    bot.sendMessage(msg.chat.id, "https://medium.com/@shibaluffyinu/get-whitelisted-for-upcoming-shiba-luffy-inu-ido-cfb858d7f24c")
+})
+
 bot.onText(/\/help/, (msg) => {
     bot.sendMessage(msg.chat.id, 'contract | tokenomics | info | ido | web | twitter | medium | shill | hype | listing')
 })
