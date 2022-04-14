@@ -31,10 +31,62 @@ else {
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 
 bot.onText(/\/urls/, (msg) => {
-    bot.sendMessage(msg.chat.id, "<a href=\"https://shibaluffyinu.org/\">Website</a>\n<a href=\"https://twitter.com/shibaluffyinu\">Twitter</a>\n<a href=\"https://medium.com/@shibaluffyinu\">Medium</a>\n<a href=\"https://bscscan.com/token/0xEd5782C218918314aAad7b3FF89BB0BFF3dC0514\">BSCscan</a>\n<a href=\"https://t.me/shibaluffyinu_official\">Telegram</a>\n")
+    const web_urls =  {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    {
+                        text: "Website",
+                        url: "https://shibaluffyinu.org/",
+                    },
+                    {
+                        text: "Twitter",
+                        url: "https://twitter.com/shibaluffyinu",
+                    },
+                    {
+                        text: "Medium",
+                        url: "https://medium.com/@shibaluffyinu",
+                    },
+                    {
+                        text: "Telegram",
+                        url: "https://t.me/shibaluffyinu_official",
+                    },
+                    {
+                        text: "BSCScan",
+                        url: "https://bscscan.com/token/0xEd5782C218918314aAad7b3FF89BB0BFF3dC0514",
+                    }
+                ],
+            ],
+        }, 
+        parse_mode: 'HTML'
+    }
+        
+    bot.sendMessage(msg.chat.id, `<b>Shiba Luffy Inu urls:</b>`,  web_urls)
 })
 bot.onText(/\/vote/, (msg) => {
-    bot.sendMessage(msg.chat.id, "<a href=\"https://coinhunt.cc/coin/1133535863\">Coinhunt</a>\n<a href=\"https://coinsniper.net/coin/30445\">Coinsniper</a>\n<a href=\"https://watcher.guru/coin/shiba-luffy-inu\">Watcherguru</a>")
+    const vote_urls =  {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    {
+                        text: "Coinhunt",
+                        url: "https://coinhunt.cc/coin/1133535863",
+                    },
+                    {
+                        text: "Coinsniper",
+                        url: "https://coinsniper.net/coin/30445",
+                    },
+                    {
+                        text: "WatcherGuru",
+                        url: "https://watcher.guru/coin/shiba-luffy-inu",
+                    }
+                ],
+            ],
+        }, 
+        parse_mode: 'HTML'
+    }
+        
+    bot.sendMessage(msg.chat.id, `<b>Vote for Shiba Luffy Inu($SLUFFY):</b>`,  vote_urls)
 })
 
 bot.onText(/\/contract/, (msg) => {
@@ -79,7 +131,7 @@ bot.onText(/\/whitelist/, (msg) => {
 })
 
 bot.onText(/\/help/, (msg) => {
-    bot.sendMessage(msg.chat.id, 'contract | tokenomics | info | ido | web | twitter | medium | shill | hype | listing')
+    bot.sendMessage(msg.chat.id, 'urls | vote| contract | tokenomics | info | ido | web | twitter | medium | listing')
 })
 
 module.exports = bot;
