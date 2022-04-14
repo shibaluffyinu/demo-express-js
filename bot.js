@@ -5,7 +5,8 @@ let bot;
 
 const shills = [
     "Combining the power of DeFi, GameFi,... Shiba Luffy Inu($SLUFFY) will be the next x100 gem in BSC.\n   💎 IDO coming soon\n    💎 Doxxed and experienced team\n    💎 Clear roadmap & tokenomics\n   💎 Audited\nIf $SLUFFY ever reach the marketcap of $ZORO, $SLUFFY will x100.\nJoin Shiba Luffy Inu community at shibaluffyinu_official, or at Shiba Luffy Inu's website for detail contact info: shibaluffyinu org.",
-    "Missed Shiba Inu and Zoro Inu, Luffy Inu? Look no further! Shiba Luffy Inu($SLUFFY) will be the next x100 gem in BSC. $SLUFFY has an 8% fee:\n   💎 4% distributed across all holders\n    💎 2% team fund\n    💎 1% burn\n   💎 1% add back to liquidity\nSLUFFY contract address: 0xEd5782C218918314aAad7b3FF89BB0BFF3dC0514\nOur website: https://shibaluffyinu.org.",
+    "Missed Shiba Inu and Zoro Inu, Luffy Inu? Look no further! Shiba Luffy Inu($SLUFFY) will be the next x100 gem in BSC. $SLUFFY has an 8% fee:\n    💎 4% distributed across all holders\n    💎 2% team fund\n    💎 1% burn\n    💎 1% add back to liquidity\nSLUFFY contract address: 0xEd5782C218918314aAad7b3FF89BB0BFF3dC0514\nOur website: https://shibaluffyinu.org.",
+    "ShibaLuffyInu 🍻\nHello Guys A New DegenPlay 🔥 Marketing has started now ✅ Project looks totally beautiful 🔥🔥 Sits at super low Mcap 🟢 Ownership renounced ❤️ Tax automatic 👀 Join the group, ask and research 🥳\n\nhttps://Shibaluffyinu . org\n\nhttps://t . me/shibaluffyinu_official\n\nBSC Address: 0xEd5782C218918314aAad7b3FF89BB0BFF3dC0514\n\n\nCalled By @MordyCalls"
 ]
 const hype = [
     "Shiba Luffy Inu to the MOON!! 🌙🌙",
