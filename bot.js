@@ -3,6 +3,21 @@ const token = process.env.TOKEN;
 const Bot = require('node-telegram-bot-api');
 let bot;
 
+const shills = [
+    "Combining the power of DeFi, GameFi,... Shiba Luffy Inu($SLUFFY) will be the next x100 gem in BSC.\n   💎 IDO coming soon\n    💎 Doxxed and experienced team\n    💎 Clear roadmap & tokenomics\n   💎 Audited\nIf $SLUFFY ever reach the marketcap of $ZORO, $SLUFFY will x100.\nJoin Shiba Luffy Inu community at shibaluffyinu_official, or at Shiba Luffy Inu's website for detail contact info: shibaluffyinu org.",
+    "Missed Shiba Inu and Zoro Inu, Luffy Inu? Look no further! Shiba Luffy Inu($SLUFFY) will be the next x100 gem in BSC. $SLUFFY has an 8% fee:\n   💎 4% distributed across all holders\n    💎 2% team fund\n    💎 1% burn\n   💎 1% add back to liquidity\nSLUFFY contract address: 0xEd5782C218918314aAad7b3FF89BB0BFF3dC0514\nOur website: https://shibaluffyinu.org.",
+]
+const hype = [
+    "Shiba Luffy Inu to the MOON!! 🌙🌙",
+    "This will be the next BSC x100 gem 💎💎",
+    "Let's go 🔥🔥",
+    "Big pump soon. 🔥🔥",
+    "Don't miss SLUFFY upcoming IDO!",
+    "IDO coming in 10 days.🔥🔥"
+]
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 if(process.env.NODE_ENV === 'production') {
   bot = new Bot(token);
   bot.setWebHook(process.env.HEROKU_URL + bot.token);
@@ -36,9 +51,20 @@ bot.onText(/\/twitter/, (msg) => {
 bot.onText(/\/medium/, (msg) => {
     bot.sendMessage(msg.chat.id, 'https://medium.com/@shibaluffyinu')
 })
+bot.onText(/\/shill/, (msg) => {
+    const rand = getRandomInt(shills.length);
+    bot.sendMessage(msg.chat.id, shills[rand])
+})
+bot.onText(/\/hype/, (msg) => {
+    const rand = getRandomInt(hype.length);
+    bot.sendMessage(msg.chat.id, hype[rand])
+})
+bot.onText(/\/listing/, (msg) => {
+    bot.sendMessage(msg.chat.id, "🔥 Coinsniper, Watcherguru, Coinhunter, thebittimes 🔥")
+})
 
 bot.onText(/\/help/, (msg) => {
-    bot.sendMessage(msg.chat.id, 'contract | tokenomics | info | ido | web | twitter | medium')
+    bot.sendMessage(msg.chat.id, 'contract | tokenomics | info | ido | web | twitter | medium | shill | hype | listing')
 })
 
 module.exports = bot;
