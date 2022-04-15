@@ -42,9 +42,37 @@ const hype = [
 ]
 const images = [
     "https://static.news.bitcoin.com/wp-content/uploads/2018/02/bitconnect-300x267.jpg",
-    "https://static.news.bitcoin.com/wp-content/uploads/2020/01/9MqI3rYI-lambo-1024x576.jpg"
+    "https://static.news.bitcoin.com/wp-content/uploads/2020/01/9MqI3rYI-lambo-1024x576.jpg",
+    "https://i.giphy.com/media/DxbAro4C39Qi5kJmPb/giphy.webp",
+    "https://i.giphy.com/media/L5BPXKUf4L5MyD1nvh/200w.webp",
+    "https://i.giphy.com/media/jQWJUET9SPFxRINeMP/200w.webp",
+    "https://i.giphy.com/media/v45XUzIyN0If6ymN9r/200w.webp",
+    "https://static.news.bitcoin.com/wp-content/uploads/2018/02/bitconnect-300x267.jpg",
+    "https://static.news.bitcoin.com/wp-content/uploads/2020/01/9MqI3rYI-lambo-1024x576.jpg",
+    "https://i.giphy.com/media/DxbAro4C39Qi5kJmPb/giphy.webp",
+    "https://i.giphy.com/media/L5BPXKUf4L5MyD1nvh/200w.webp",
+    "https://i.giphy.com/media/jQWJUET9SPFxRINeMP/200w.webp",
+    "https://i.giphy.com/media/v45XUzIyN0If6ymN9r/200w.webp"
+]
+const meme_quotes = [
+    "🌙 This will be us",
+    "LET'S GOOOO 🔥🔥",
+    "LET'S TAKE OVER TWITTER #ShibaLuffyInu",
+    "💎💎 $SLUFFY is the future  💎💎",
+    "Shiba Luffy Inu to the MOON!! 🌙🌙",
+    "This will be the next BSC x100 gem 💎💎",
+    "Let's go 🔥🔥",
+    "Big pump soon. 🔥🔥",
+    "Don't miss SLUFFY upcoming IDO!",
+    "IDO coming soon.🔥🔥"
 ]
 const shill_images = [
+    "https://miro.medium.com/max/1050/1*hjrCn0cQHNG3EDNSCvORjA.png",
+    'https://i.imgur.com/BgWvVdp.jpg',
+    "https://miro.medium.com/max/1050/1*hjrCn0cQHNG3EDNSCvORjA.png",
+    'https://i.imgur.com/BgWvVdp.jpg',
+    "https://miro.medium.com/max/1050/1*hjrCn0cQHNG3EDNSCvORjA.png",
+    'https://i.imgur.com/BgWvVdp.jpg',
     "https://miro.medium.com/max/1050/1*hjrCn0cQHNG3EDNSCvORjA.png",
     'https://i.imgur.com/BgWvVdp.jpg'
 ]
@@ -176,13 +204,14 @@ bot.onText(/\/announcement/, (msg) => {
     })
 })
 bot.onText(/\/shill/, (msg) => {
-    const rand = getRandomInt(shills.length * 5);
-    const randImg = getRandomInt(shill_images.length * 5);
+    const rand = getRandomInt(shills.length * 100);
+    const randImg = getRandomInt(shill_images.length * 100);
     bot.sendPhoto(msg.chat.id, shill_images[randImg % shill_images.length], {caption : shills[rand % shills.length]})
 })
 bot.onText(/\/hype/, (msg) => {
-    const rand = getRandomInt(hype.length * 5);
-    bot.sendMessage(msg.chat.id, hype[rand % hype.length])
+    const randQuote = getRandomInt(meme_quotes.length * 100)
+    const randImg = getRandomInt(images.length * 100);
+    bot.sendPhoto(msg.chat.id, images[randImg % images.length], {caption: meme_quotes[randQuote % meme_quotes.length]})
 })
 bot.onText(/\/announce1/, (msg) => {
     bot.sendMessage(msg.chat.id, announce1)
