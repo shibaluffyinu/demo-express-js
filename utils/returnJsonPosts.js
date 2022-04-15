@@ -1,4 +1,4 @@
-import editText from '../utils/editText'
+import editText from './editText'
 
 function returnJsonPosts(mediumPosts, mediumItems){
   let dataMedium = []
