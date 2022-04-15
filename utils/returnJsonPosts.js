@@ -1,4 +1,4 @@
-import editText from './editText'
+const { editText } = require('./editText')
 
 function returnJsonPosts(mediumPosts, mediumItems){
   let dataMedium = []
@@ -20,4 +20,4 @@ function returnJsonPosts(mediumPosts, mediumItems){
   return dataMedium
 }
 
-export default returnJsonPosts
+module.exports = { returnJsonPosts }

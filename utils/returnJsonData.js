@@ -1,4 +1,4 @@
-import axios from 'axios'
+const axios = require('axios')
 const any = require('promise.any')
 
 async function returnJsonData(usermedium){
@@ -14,4 +14,4 @@ async function returnJsonData(usermedium){
   return data
 }
 
-export default returnJsonData
+module.exports = { returnJsonData }

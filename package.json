@@ -15,6 +15,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.13.4",
     "node-telegram-bot-api": "^0.30.0",
+    "promise.any": "^2.0.4",
     "string-sanitizer": "^2.0.2"
   }
 }

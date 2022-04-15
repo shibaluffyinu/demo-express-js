@@ -1,9 +1,9 @@
 const token = process.env.TOKEN;
 
 const Bot = require('node-telegram-bot-api');
-import { sanitize } from 'string-sanitizer'
-import returnJsonData from './utils/returnJsonData'
-import returnJsonPosts from './utils/returnJsonPosts'
+const  { sanitize } = require('string-sanitizer')
+const { returnJsonData } = require('./utils/returnJsonData')
+const { returnJsonPosts } = require('./utils/returnJsonPosts')
 let bot;
 
 function MediumPostsController(){
@@ -77,7 +77,9 @@ bot.onText(/\/urls/, (msg) => {
                     {
                         text: "Medium",
                         url: "https://medium.com/@shibaluffyinu",
-                    },
+                    }
+                ],
+                [
                     {
                         text: "Telegram",
                         url: "https://t.me/shibaluffyinu_official",
@@ -145,7 +147,8 @@ bot.onText(/\/token/, (msg) => {
         }, 
         parse_mode: 'HTML'
     }
-    bot.sendMessage(msg.chat.id, '📈 Symbol: SLUFFY\n📈 Decimals: 8\n📈 Total supply: 1,000,000,000,000,000\n\nDistribute:\n  💸 90% IDO & DEX listing\n  💸 5% marketing\n  💸 5% Airdrop\n\nFee 8%:\n  💰 4% distribute to hodlers\n  💰 2% team fund\n  💰 1% burn\n  💰 1% buyback', web_urls)
+    bot.sendPhoto(msg.chat.id, 'https://i.imgur.com/7RPUUKW.png', {...web_urls, caption: '📈 Symbol: SLUFFY\n📈 Decimals: 8\n📈 Total supply: 1,000,000,000,000,000\n\nDistribute:\n  💸 90% IDO & DEX listing\n  💸 5% marketing\n  💸 5% Airdrop\n\nFee 8%:\n  💰 4% distribute to hodlers\n  💰 2% team fund\n  💰 1% burn\n  💰 1% buyback'})
+    //bot.sendMessage(msg.chat.id, '📈 Symbol: SLUFFY\n📈 Decimals: 8\n📈 Total supply: 1,000,000,000,000,000\n\nDistribute:\n  💸 90% IDO & DEX listing\n  💸 5% marketing\n  💸 5% Airdrop\n\nFee 8%:\n  💰 4% distribute to hodlers\n  💰 2% team fund\n  💰 1% burn\n  💰 1% buyback', web_urls)
 })
 // bot.onText(/\/tokenomics/, (msg) => {
 //     bot.sendMessage(msg.chat.id, 'Distribute:\n  💸 90% IDO & DEX listing\n  💸 5% marketing\n  💸 5% Airdrop\n\nFee 8%:\n  💰 4% distribute to hodlers\n  💰 2% team fund\n  💰 1% burn\n  💰 1% buyback')
@@ -159,7 +162,7 @@ bot.onText(/\/announcement/, (msg) => {
                     inline_keyboard: [
                         [
                             {
-                                text: "Full",
+                                text: "Read full article",
                                 url: newestPost.link,
                             }
                         ],

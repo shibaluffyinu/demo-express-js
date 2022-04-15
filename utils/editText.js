@@ -18,4 +18,4 @@ function editText(){
     }
   }
   
-  export default editText
+module.exports = { editText }
