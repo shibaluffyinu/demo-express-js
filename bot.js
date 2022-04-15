@@ -1,7 +1,30 @@
 const token = process.env.TOKEN;
 
 const Bot = require('node-telegram-bot-api');
+import { sanitize } from 'string-sanitizer'
+import returnJsonData from './utils/returnJsonData'
+import returnJsonPosts from './utils/returnJsonPosts'
 let bot;
+
+function MediumPostsController(){
+    async function index(usermedium){
+
+        const userSanitized = sanitize(`${usermedium}`)
+
+        try{
+            const mediumPosts = (userSanitized)? await returnJsonData(userSanitized.toString()) : { message: 'Unspecified user' }
+            
+            const dataMedium = returnJsonPosts(mediumPosts, mediumPosts.items)
+
+            return dataMedium
+        } catch{
+            return []
+        }
+    }
+    return {
+        index
+    }
+}
 
 const shills = [
     "Combining the power of DeFi, GameFi,... Shiba Luffy Inu($SLUFFY) will be the next x100 gem in BSC.\n   💎 IDO coming soon\n    💎 Doxxed and experienced team\n    💎 Clear roadmap & tokenomics\n   💎 Audited\nIf $SLUFFY ever reach the marketcap of $ZORO, $SLUFFY will x100.\nJoin Shiba Luffy Inu community at shibaluffyinu_official, or at Shiba Luffy Inu's website for detail contact info: shibaluffyinu org.",
@@ -15,7 +38,15 @@ const hype = [
     "Let's go 🔥🔥",
     "Big pump soon. 🔥🔥",
     "Don't miss SLUFFY upcoming IDO!",
-    "IDO coming in 10 days.🔥🔥"
+    "IDO coming soon.🔥🔥"
+]
+const images = [
+    "https://static.news.bitcoin.com/wp-content/uploads/2018/02/bitconnect-300x267.jpg",
+    "https://static.news.bitcoin.com/wp-content/uploads/2020/01/9MqI3rYI-lambo-1024x576.jpg"
+]
+const shill_images = [
+    "https://miro.medium.com/max/1050/1*hjrCn0cQHNG3EDNSCvORjA.png",
+    'https://i.imgur.com/BgWvVdp.jpg'
 ]
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -50,6 +81,10 @@ bot.onText(/\/urls/, (msg) => {
                     {
                         text: "Telegram",
                         url: "https://t.me/shibaluffyinu_official",
+                    },
+                    {
+                        text: "Whitepaper",
+                        url: "https://shibaluffyinu2022.gitbook.io/shiba-luffy-inu-whitepaper/",
                     },
                     {
                         text: "BSCScan",
@@ -96,24 +131,51 @@ bot.onText(/\/contract/, (msg) => {
 bot.onText(/\/ido/, (msg) => {
     bot.sendMessage(msg.chat.id, 'IDO is planned to start on 24/4/2022 at DxSale')
 })
-bot.onText(/\/info/, (msg) => {
-    bot.sendMessage(msg.chat.id, 'Symbol: SLUFFY, Decimals: 8, Total supply: 1,000,000,000,000,000')
+bot.onText(/\/token/, (msg) => {
+    const web_urls =  {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    {
+                        text: "Token Info",
+                        url: "https://shibaluffyinu2022.gitbook.io/shiba-luffy-inu-whitepaper/poneglyph/usdsluffy-token",
+                    }
+                ],
+            ],
+        }, 
+        parse_mode: 'HTML'
+    }
+    bot.sendMessage(msg.chat.id, '📈 Symbol: SLUFFY\n📈 Decimals: 8\n📈 Total supply: 1,000,000,000,000,000\n\nDistribute:\n  💸 90% IDO & DEX listing\n  💸 5% marketing\n  💸 5% Airdrop\n\nFee 8%:\n  💰 4% distribute to hodlers\n  💰 2% team fund\n  💰 1% burn\n  💰 1% buyback', web_urls)
 })
-bot.onText(/\/tokenomics/, (msg) => {
-    bot.sendMessage(msg.chat.id, '95% IDO & DEX listing, 5% marketing | 8% fee: 4% distribute to hodlers, 2% team fund, 1% burn, 1% add back to liquidity pool')
-})
-bot.onText(/\/web/, (msg) => {
-    bot.sendMessage(msg.chat.id, 'https://shibaluffyinu.org')
-})
-bot.onText(/\/twitter/, (msg) => {
-    bot.sendMessage(msg.chat.id, 'https://twitter.com/shibaluffyinu')
-})
-bot.onText(/\/medium/, (msg) => {
-    bot.sendMessage(msg.chat.id, 'https://medium.com/@shibaluffyinu')
+// bot.onText(/\/tokenomics/, (msg) => {
+//     bot.sendMessage(msg.chat.id, 'Distribute:\n  💸 90% IDO & DEX listing\n  💸 5% marketing\n  💸 5% Airdrop\n\nFee 8%:\n  💰 4% distribute to hodlers\n  💰 2% team fund\n  💰 1% burn\n  💰 1% buyback')
+// })
+bot.onText(/\/announcement/, (msg) => {
+    MediumPostsController().index("shibaluffyinu").then(data => {
+        if(data.length > 0) {
+            const newestPost = data[0]
+            const options =  {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: "Full",
+                                url: newestPost.link,
+                            }
+                        ],
+                    ],
+                }, 
+                parse_mode: 'HTML'
+            }
+            if(newestPost.image && newestPost.image != '')bot.sendPhoto(msg.chat.id, newestPost.image);
+            bot.sendMessage(msg.chat.id, `<b>${newestPost.title}</b> \n<i>${newestPost.description}</i>`, options)
+        }
+    })
 })
 bot.onText(/\/shill/, (msg) => {
     const rand = getRandomInt(shills.length * 5);
-    bot.sendMessage(msg.chat.id, shills[rand % shills.length])
+    const randImg = getRandomInt(shill_images.length * 5);
+    bot.sendPhoto(msg.chat.id, shill_images[randImg % shill_images.length], {caption : shills[rand % shills.length]})
 })
 bot.onText(/\/hype/, (msg) => {
     const rand = getRandomInt(hype.length * 5);
@@ -122,16 +184,18 @@ bot.onText(/\/hype/, (msg) => {
 bot.onText(/\/announce1/, (msg) => {
     bot.sendMessage(msg.chat.id, announce1)
 })
-bot.onText(/\/listing/, (msg) => {
-    bot.sendMessage(msg.chat.id, "🔥 Coinsniper, Watcherguru, Coinhunter, thebittimes 🔥")
-})
 
 bot.onText(/\/whitelist/, (msg) => {
     bot.sendMessage(msg.chat.id, "https://medium.com/@shibaluffyinu/get-whitelisted-for-upcoming-shiba-luffy-inu-ido-cfb858d7f24c")
 })
 
 bot.onText(/\/help/, (msg) => {
-    bot.sendMessage(msg.chat.id, 'urls | vote| contract | tokenomics | info | ido | web | twitter | medium | listing')
+    bot.sendMessage(msg.chat.id, "How can I help?", {
+        "reply_markup": {
+            "keyboard": [["/urls", "/vote"],   ["/contract", "/token"], ["/announcement", "/ido"], ["/whitelist"], ["/hype", "/shill"]]
+        }
+    });
+    //bot.sendMessage(msg.chat.id, 'urls | vote | contract | token | announcement | ido | announcement | whitelist | hype | shill')
 })
 
 module.exports = bot;
